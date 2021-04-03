@@ -1,3 +1,4 @@
 #!/bin/bash
-DIR="$(cd "$(dirname "$0")" && pwd)"
-ln -s $DIR/.vimrc $HOME/.vimrc
+echo "Napište příkaz pro instalaci balíčku (např. apt install)"
+read PACKAGE_MANAGER_INSTALL_COMMAND
+sudo $PACKAGE_MANAGER_INSTALL_COMMAND python3-devel gcc gcc-c++ htop ncdu
