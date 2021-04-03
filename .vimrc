@@ -9,7 +9,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'arcticicestudio/nord'
-Plug 'kamwitsta/nordisk'
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'lervag/vimtex'
@@ -18,6 +17,8 @@ Plug 'valloric/youcompleteme'
 Plug 'mbbill/undotree'
 Plug 'xuhdev/vim-latex-live-preview'
 Plug 'scrooloose/nerdtree'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'zhamlin/tiler.vim'
 
 call plug#end()
 
@@ -31,30 +32,36 @@ filetype off
 
 set tabstop=4 softtabstop=4 shiftwidth=4
 set smartindent
-set nu
 set smartcase
 set noswapfile
 set undodir=~/.vim/undodir
 set undofile
 set incsearch
+set mouse=a
+
+" toggle hybrid line numbers
+" set nu
+set number relativenumber
 
 " vim-workspace
-" autocmd BuffWritePost *.tex !pdftex
 let g:workspace_autosave_always = 1
-
-colorscheme nordisk
 
 set list listchars=tab:⟶\ ,trail:·,extends:>,precedes:<,nbsp:%
 set list
 
 syntax on
 
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+nmap <leader>n :NERDTreeFocus<CR>
+nmap <C-n> :NERDTree<CR>
+nmap <C-t> :NERDTreeToggle<CR>
+nmap <C-f> :NERDTreeFind<CR>
+
+nmap <F8> :TagbarToggle<CR>
 
 nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
+
+imap jk <Esc>
+imap kj <Esc>
