@@ -19,6 +19,7 @@ Plug 'xuhdev/vim-latex-live-preview'
 Plug 'scrooloose/nerdtree'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'zhamlin/tiler.vim'
+Plug 'alvan/vim-closetag'
 
 call plug#end()
 
@@ -46,8 +47,11 @@ set number relativenumber
 " vim-workspace
 let g:workspace_autosave_always = 1
 
-set list listchars=tab:⟶\ ,trail:·,extends:>,precedes:<,nbsp:%
+set list listchars=tab:\|\ ,trail:·,extends:>,precedes:<,nbsp:%
 set list
+
+set numberwidth=5
+highlight LineNr ctermfg=grey ctermbg=darkgrey
 
 syntax on
 
