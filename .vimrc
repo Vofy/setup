@@ -23,6 +23,12 @@ Plug 'alvan/vim-closetag'
 
 call plug#end()
 
+" configure expanding of tabs for various file types
+au BufRead,BufNewFile *.py set expandtab
+au BufRead,BufNewFile *.c set expandtab
+au BufRead,BufNewFile *.h set expandtab
+au BufRead,BufNewFile Makefile* set noexpandtab
+
 set noerrorbells
 set novisualbell
 " Tohle opravdu funguje
@@ -31,7 +37,10 @@ set belloff=all
 " Helps force plug-ins to load correctly when it is turned back on below.
 filetype off
 
+set textwidth=120
 set tabstop=4 softtabstop=4 shiftwidth=4
+set expandtab
+set autoindent
 set smartindent
 set smartcase
 set noswapfile
@@ -39,6 +48,8 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set mouse=a
+set ruler
+set showcmd
 
 " toggle hybrid line numbers
 " set nu
@@ -47,11 +58,14 @@ set number relativenumber
 " vim-workspace
 let g:workspace_autosave_always = 1
 
+" make backspaces more powerfull
+set backspace=indent,eol,start
+
 set list listchars=tab:\|\ ,trail:·,extends:>,precedes:<,nbsp:%
 set list
 
 set numberwidth=5
-highlight LineNr ctermfg=grey ctermbg=darkgrey
+highlight LineNr ctermfg=grey ctermbg=Black
 
 syntax on
 
