@@ -34,6 +34,9 @@ keys = [
     # Move the master pane Left/Right:
     Key([mod, "shift"], "space", lazy.layout.flip()),
 
+    Key([mod, "shift"], "h", lazy.layout.client_to_previous()),
+    Key([mod, "shift"], "l", lazy.layout.client_to_next()),
+
     # Toggel fullscreen on/off:
     Key([mod], "f", lazy.window.toggle_fullscreen()),
 
@@ -70,12 +73,12 @@ keys = [
 ]
 
 groups = [
-    Group("1", label=""),
-    Group("2", matches=[Match(wm_class=["firefox"])], label=""),
-    Group("3", matches=[Match(wm_class=["vim"])], label=""),
-    Group("4", matches=[Match(wm_class=["libreoffice"])], label=""),
-    Group("5", matches=[Match(wm_class=["thunderbird"])], label=""),
-    Group("6", matches=[Match(wm_class=["code-oss"])], label=""),
+    Group("1", matches=[Match(wm_class=["firefox"])], label=""),
+    Group("2", matches=[Match(wm_class=["alacritty"])], label=""),
+    Group("3", matches=[Match(wm_class=["code", "code-oss", "atom"])], label=""),
+    Group("4", matches=[Match(wm_class=["vim"])], label=""),
+    Group("5", matches=[Match(wm_class=["libreoffice"])], label=""),
+    Group("6", matches=[Match(wm_class=["thunderbird"])], label=""),
 ]
 
 for i in groups:
@@ -89,15 +92,15 @@ for i in groups:
         ])
 
 layouts = [
-        layout.Columns(border_focus_stack='#fa6000', margin=10),
+        layout.Columns(border_focus_stack='#fa6000', margin=0),
         # layout.Max(),
-        layout.Stack(num_stacks=2, margin=10),
+        layout.Stack(num_stacks=2, margin=0),
         # layout.Bsp(),
         # layout.Matrix(),
-        layout.MonadTall(margin=10),
+        layout.MonadTall(margin=0),
         # layout.MonadWide(),
         # layout.RatioTile(),
-        layout.Tile(margin=10),
+        layout.Tile(margin=0),
         # layout.TreeTab(),
         # layout.VerticalTile(),
         # layout.Zoomy(),
@@ -140,7 +143,7 @@ topBar = bar.Bar([
     widget.TextBox(text='|   ', foreground="b48ead"),
     widget.QuickExit(default_text='Shutdown', countdown_format="{} seconds", foreground="b48ead"),
     widget.TextBox(text=' '),
-], 32, background="#1f262a", margin=[10,10,0,10])
+], 32, background="#1f262a") # margin=[10,10,0,10]
 
 screens = [
         Screen(
@@ -153,7 +156,7 @@ screens = [
                 widget.CurrentLayoutIcon(scale=0.5),
                 widget.GroupBox(),
                 widget.WindowName(),
-            ], 32, background="1f262a", margin=[10,10,0,10]),
+            ], 32, background="1f262a"),
             wallpaper='~/Pictures/wallpapers/carina-nebula.jpg',
             wallpaper_mode='fill',
             ),
@@ -162,7 +165,7 @@ screens = [
                 widget.CurrentLayoutIcon(scale=0.5),
                 widget.GroupBox(),
                 widget.WindowName(),
-            ], 32, background="1f262a", margin=[10,10,0,10]),
+            ], 32, background="1f262a"),
             wallpaper='~/Pictures/wallpapers/carina-nebula.jpg',
             wallpaper_mode='fill',
             ),
@@ -171,7 +174,7 @@ screens = [
                 widget.CurrentLayoutIcon(scale=0.5),
                 widget.GroupBox(),
                 widget.WindowName(),
-                ], 32, background="1f262a", margin=[10,10,0,10]),
+                ], 32, background="1f262a"),
             wallpaper='~/Pictures/wallpapers/carina-nebula.jpg',
             wallpaper_mode='fill',
             )
