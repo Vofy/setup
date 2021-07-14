@@ -15,21 +15,17 @@ keys = [
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
 
+    # Change Layout:
+    Key([mod], "Tab", lazy.next_layout()),
+
+    # Close focused window:
+    Key([mod], "q", lazy.window.kill()),
+
     # Swap places:
     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
     Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
     Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
-
-    Key([mod, "control"], "j", lazy.layout.grow_down(), lazy.layout.shrink().when('xmonad-tall')),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), lazy.layout.grow().when('xmonad-tall')),
-    Key([mod, "control"], "h", lazy.layout.grow_left()),
-    Key([mod, "control"], "l", lazy.layout.grow_right()),
-
-    Key([mod], "w", lazy.to_screen(0)),
-    Key([mod], "y", lazy.to_screen(1)),
-    Key([mod, "shift"], "w", lazy.window.to_screen(0)),
-    Key([mod, "shift"], "y",lazy.window.to_screen(1)),
 
     # Move the master pane Left/Right:
     Key([mod, "shift"], "space", lazy.layout.flip()),
@@ -37,29 +33,30 @@ keys = [
     Key([mod, "shift"], "h", lazy.layout.client_to_previous()),
     Key([mod, "shift"], "l", lazy.layout.client_to_next()),
 
-    # Toggel fullscreen on/off:
-    Key([mod], "f", lazy.window.toggle_fullscreen()),
+    Key([mod, "shift"], "1", lazy.window.toscreen(1)),
 
-    # Change Layout:
-    Key([mod], "Tab", lazy.next_layout()),
+    # Resize windows:
+    Key([mod, "control"], "j", lazy.layout.grow_down(), lazy.layout.shrink().when('xmonad-tall')),
+    Key([mod, "control"], "k", lazy.layout.grow_up(), lazy.layout.grow().when('xmonad-tall')),
+    Key([mod, "control"], "h", lazy.layout.grow_left()),
+    Key([mod, "control"], "l", lazy.layout.grow_right()),
 
-    # Close focused window:
-    Key([mod], "q", lazy.window.kill()),
+    # Toggle floating on/off:
+    Key([mod, "control"], "a", lazy.window.disable_floating()),
+
+    # Toggle fullscreen on/off:
+    Key([mod, "control"], "f", lazy.window.toggle_fullscreen()),
+
+    # Run apps or commands:
+    Key([mod], "Return", lazy.spawn("alacritty")),
+    Key([mod], "d", lazy.spawn("rofi -show drun")),
+    Key([mod], 'x', lazy.spawn("rofi -show power-menu -modi power-menu:rofi-power-menu")),
 
     # Restart qtile in place:
     Key([mod, "control"], "r", lazy.restart()),
 
     # Open a run prompt:
     Key([mod], "r", lazy.spawncmd()),
-
-    # Applications/Scripts Shortcuts:
-    Key([mod], "Return", lazy.spawn("alacritty")),
-    Key([mod], "d", lazy.spawn("rofi -show drun")),
-    Key([mod], 'x', lazy.spawn("rofi -show power-menu -modi power-menu:rofi-power-menu")),
-    Key([mod, "shift"], "f", lazy.spawn("firefox")),
-    Key([mod, "shift"], "c", lazy.spawn("code-oss")),
-    Key([mod, "shift"], "t", lazy.spawn("thunderbird")),
-    Key([mod, "shift"], "b", lazy.spawn("thunar")),
 
     # Audio buttons
     Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
@@ -85,10 +82,8 @@ for i in groups:
     keys.extend([
         Key([mod], i.name, lazy.group[i.name].toscreen(),
             desc="Switch to group {}".format(i.name)),
-
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
+        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=False),
             desc="Switch to & move focused window to group {}".format(i.name)),
-        #     desc="move focused window to group {}".format(i.name)),
         ])
 
 layouts = [
@@ -182,10 +177,8 @@ screens = [
 
 # Drag floating layouts.
 mouse = [
-        #Drag([mod], "Button1", lazy.window.set_position_floating(),
-        #     start=lazy.window.get_position()),
-        Drag([mod], "Button1", lazy.window.set_position(),
-            start=lazy.window.get_position()),
+        Drag([mod], "Button1", lazy.window.set_position_floating(),
+             start=lazy.window.get_position()),
         Drag([mod], "Button3", lazy.window.set_size_floating(),
             start=lazy.window.get_size()),
         Click([mod], "Button2", lazy.window.bring_to_front())
